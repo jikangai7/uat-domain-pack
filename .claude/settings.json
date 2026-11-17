@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(./pack/**)",
+      "Edit(./rulebook/**)",
+      "Edit(./schema/**)"
+    ]
+  }
+}

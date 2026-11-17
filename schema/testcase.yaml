@@ -1,0 +1,36 @@
+# テストケースのスキーマ
+# 選択肢（enum）は pack の定義から取る。自由記述にしない。
+
+testcase:
+  id:        {required: true,  format: "TC-<領域>-<連番>"}
+  観点ID:    {required: true,  note: "スコープ判定・観点表の行へのリンク"}
+  根拠:      {required: true,  type: list, note: "pack のファイル#見出し、要件ID、Confluenceページ名"}
+  確度:      {required: true,  enum: [確定, 推測, 要確認]}
+  設計技法:  {required: true,  enum: [同値分割, 境界値, ペアワイズ, デシジョンテーブル, 状態遷移, 経験ベース]}
+  優先度:    {required: true,  enum: [高, 中, 低]}
+  条件:
+    段階:      {enum: [検索, 予約, 購入, 発券, 予約後, 変更払戻]}
+    経路クラス: {note: "pack/classes のクラスID"}
+    旅客:      {note: "pack/classes の旅客クラスID"}
+    OEM:       {note: "pack/variation のOEM一覧から"}
+    デバイス:  {enum: [PC, スマホWeb, アプリ]}
+    付帯商品:  {type: list}
+  実行環境:  {required: true,  enum: [pre, stg, 本番]}
+  前提:      {type: list, note: "env/ のSETUP-ID で参照"}
+  手順:      {required: true,  type: list}
+  期待結果:  {required: true,  note: "検証できる形で1つだけ"}
+  ペアワイズ行: {note: "output/<案件>/pairwise.tsv の行番号（使った場合）"}
+
+# 例
+example:
+  id: TC-BOOK-012
+  観点ID: VP-BOOK-03
+  根拠: ["pack/classes/同値クラス.md#C-NDC", "REQ-045"]
+  確度: 要確認
+  設計技法: ペアワイズ
+  優先度: 高
+  条件: {段階: 購入, 経路クラス: C-NDC, 旅客: [P-ADT, P-INF], デバイス: スマホWeb}
+  実行環境: stg
+  前提: [SETUP-03]
+  手順: ["...", "..."]
+  期待結果: "..."

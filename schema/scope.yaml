@@ -1,0 +1,13 @@
+# スコープ判定のスキーマ
+
+scope:
+  案件ID:   {required: true}
+  概要:     {required: true, note: "1〜3行"}
+  判定:
+    - 領域:   {required: true, note: "段階・付帯商品・管理画面など"}
+      区分:   {required: true, enum: [必須, 影響, 回帰, 対象外, 不明]}
+      理由:   {required: true}
+      根拠:   {required: true, note: "pack/impact-map.md の行、要件ID"}
+      関係する軸: {type: list, note: "接続方式・価格調整・OEM など、差ありの軸"}
+      優先度: {enum: [高, 中, 低]}
+  不明点:   {type: list, note: "questions/質問のたね.md にも追記する"}
